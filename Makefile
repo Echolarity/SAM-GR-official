@@ -1,6 +1,6 @@
 .PHONY: build commit license quality style test
 
-check_dirs := scripts src tests tests_v1
+check_dirs := samgr scripts src tests tests_v1
 
 RUN := $(shell command -v uv >/dev/null 2>&1 && echo "uv run" || echo "")
 BUILD := $(shell command -v uv >/dev/null 2>&1 && echo "uv build" || echo "python -m build")

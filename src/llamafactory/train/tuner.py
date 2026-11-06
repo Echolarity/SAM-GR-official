@@ -18,7 +18,7 @@ from typing import TYPE_CHECKING, Any, Optional
 
 import torch
 import torch.distributed as dist
-from transformers import EarlyStoppingCallback, PreTrainedModel
+from transformers import PreTrainedModel
 
 from ..data import get_template_and_fix_tokenizer
 from ..extras import logging
@@ -27,7 +27,7 @@ from ..extras.misc import find_available_port, get_device_name, get_torch_device
 from ..extras.packages import is_mcore_adapter_available, is_ray_available
 from ..hparams import RayArguments, get_infer_args, get_ray_args, get_train_args, read_args
 from ..model import load_model, load_tokenizer
-from .callbacks import LogCallback, PissaConvertCallback, ReporterCallback
+from .callbacks import ConvergenceEarlyStoppingCallback, LogCallback, PissaConvertCallback, ReporterCallback
 from .dpo import run_dpo
 from .kto import run_kto
 from .ppo import run_ppo
@@ -67,7 +67,13 @@ def _training_function(config: dict[str, Any]) -> None:
         callbacks.append(get_swanlab_callback(finetuning_args))
 
     if finetuning_args.early_stopping_steps is not None:
-        callbacks.append(EarlyStoppingCallback(early_stopping_patience=finetuning_args.early_stopping_steps))
+        callbacks.append(
+            ConvergenceEarlyStoppingCallback(
+                early_stopping_patience=finetuning_args.early_stopping_steps,
+                early_stopping_threshold=finetuning_args.early_stopping_threshold,
+                early_stopping_min_epochs=finetuning_args.early_stopping_min_epochs,
+            )
+        )
 
     callbacks.append(ReporterCallback(model_args, data_args, finetuning_args, generating_args))  # add to last
 

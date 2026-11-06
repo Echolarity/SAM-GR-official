@@ -1,7 +1,7 @@
 ### model
 model_name_or_path: ./models/Qwen2.5-0.5B-Inject-Industrial_and_Scientific
 trust_remote_code: true
-# add_tokens_list: 'data/Industrial_and_Scientific/new_tokens.json'  # 已通过 inject_priors.py 注入
+# add_tokens_list: 'data/Industrial_and_Scientific/new_tokens.json'  # 已通过 samgr/inject_priors.py 注入
 ### method
 stage: sft
 do_train: true

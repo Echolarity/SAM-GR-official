@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# Smoke-test torchrun shim: create the embedding artifact expected by main.sh.
+set -euo pipefail
+
+root=""
+dataset=""
+plm="Qwen3VL"
+mode="text_only"
+prev=""
+for arg in "$@"; do
+  case "$prev" in
+    --root) root="$arg" ;;
+    --dataset) dataset="$arg" ;;
+    --plm_name) plm="$arg" ;;
+    --mode) mode="$arg" ;;
+  esac
+  prev="$arg"
+done
+
+if [ -n "$root" ] && [ -n "$dataset" ]; then
+  mkdir -p "$root"
+  : > "$root/$dataset.emb-$plm-$mode.npy"
+  echo "[stub] torchrun -> $root/$dataset.emb-$plm-$mode.npy"
+else
+  echo "[stub] torchrun (no artifact; missing --root/--dataset)"
+fi

@@ -24,7 +24,7 @@ from typing import TYPE_CHECKING, Any, Optional
 import torch
 import transformers
 from peft import PeftModel
-from transformers import PreTrainedModel, ProcessorMixin, TrainerCallback
+from transformers import EarlyStoppingCallback, PreTrainedModel, ProcessorMixin, TrainerCallback
 from transformers.trainer_utils import PREFIX_CHECKPOINT_DIR, has_length
 from transformers.utils import SAFE_WEIGHTS_NAME, WEIGHTS_NAME
 from typing_extensions import override
@@ -334,6 +334,28 @@ class LogCallback(TrainerCallback):
                     remaining_time=self.remaining_time,
                 )
                 self.thread_pool.submit(self._write_log, args.output_dir, logs)
+
+
+class ConvergenceEarlyStoppingCallback(EarlyStoppingCallback):
+    r"""Early stopping with an absolute improvement threshold and an epoch warmup guard."""
+
+    def __init__(
+        self,
+        early_stopping_patience: int = 1,
+        early_stopping_threshold: float = 0.0,
+        early_stopping_min_epochs: float = 0.0,
+    ) -> None:
+        super().__init__(
+            early_stopping_patience=early_stopping_patience,
+            early_stopping_threshold=early_stopping_threshold,
+        )
+        self.early_stopping_min_epochs = early_stopping_min_epochs
+
+    @override
+    def on_evaluate(self, args: "TrainingArguments", state: "TrainerState", control: "TrainerControl", **kwargs):
+        if state.epoch is not None and state.epoch < self.early_stopping_min_epochs:
+            return
+        super().on_evaluate(args, state, control, **kwargs)
 
 
 class ReporterCallback(TrainerCallback):

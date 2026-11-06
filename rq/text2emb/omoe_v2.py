@@ -95,6 +95,9 @@ class OMoE2(nn.Module):
             experts.append(shared(concat))
 
         gates = F.softmax(self.gate(concat), dim=-1)
+        # expose internals for analysis (both train and eval)
+        self._monitor_experts = [e.detach() for e in experts]
+        self._monitor_gates = gates.detach()
         moe = torch.zeros_like(experts[0])
         for k in range(self.num_experts):
             moe = moe + gates[:, k].unsqueeze(-1) * experts[k]
@@ -134,6 +137,10 @@ class OMoE2(nn.Module):
             + self.dup_weight * dup
             + self.var_weight * var
         )
+
+        # instrumentation for analysis (no effect on training)
+        self._monitor_experts = [e.detach() for e in experts]
+        self._monitor_gates = gates.detach()
 
         self._monitor_weights = mean_gate.detach().cpu().numpy()
         self._monitor_loss_rec_real = float(rec.detach().cpu().item())

@@ -88,5 +88,158 @@
       "response": "output",
       "system": "system"
     }
+  },
+  "Beauty_and_Personal_Care_train": {
+    "file_name": "Beauty_and_Personal_Care/sft/train.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+  },
+  "Beauty_and_Personal_Care_valid": {
+    "file_name": "Beauty_and_Personal_Care/sft/valid.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+  },
+  "Sports_Outdoors_base_train": {
+    "file_name": "Sports_Outdoors_base/sft/train.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+  },
+  "Sports_Outdoors_base_valid": {
+    "file_name": "Sports_Outdoors_base/sft/valid.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+  },
+  "Sports_Outdoors_base_test": {
+    "file_name": "Sports_Outdoors_base/sft/test.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+  },
+  "Sports_Outdoors_base_csga_train": {
+    "file_name": "Sports_Outdoors_base_csga/sft/train.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+  },
+  "Sports_Outdoors_base_csga_valid": {
+    "file_name": "Sports_Outdoors_base_csga/sft/valid.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+  },
+  "Sports_Outdoors_base_csga_test": {
+    "file_name": "Sports_Outdoors_base_csga/sft/test.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+  },
+  "Sports_Outdoors_late_fusion_2p2_train": {
+    "file_name": "Sports_Outdoors_late_fusion_2p2/sft/train.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+  },
+  "Sports_Outdoors_late_fusion_2p2_valid": {
+    "file_name": "Sports_Outdoors_late_fusion_2p2/sft/valid.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+  },
+  "Sports_Outdoors_late_fusion_2p2_test": {
+    "file_name": "Sports_Outdoors_late_fusion_2p2/sft/test.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+  },
+  "Sports_D_base_omoe_v2_train": {
+    "file_name": "Sports_D_base_omoe_v2/sft/train.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+  },
+  "Sports_D_base_omoe_v2_valid": {
+    "file_name": "Sports_D_base_omoe_v2/sft/valid.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+  },
+  "Sports_D_base_omoe_v2_test": {
+    "file_name": "Sports_D_base_omoe_v2/sft/test.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+  },
+  "Sports_E_full_csga_omoe_v2_train": {
+    "file_name": "Sports_E_full_csga_omoe_v2/sft/train.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+  },
+  "Sports_E_full_csga_omoe_v2_valid": {
+    "file_name": "Sports_E_full_csga_omoe_v2/sft/valid.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+  },
+  "Sports_E_full_csga_omoe_v2_test": {
+    "file_name": "Sports_E_full_csga_omoe_v2/sft/test.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
   }
 }

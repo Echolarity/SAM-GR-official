@@ -1,0 +1,52 @@
+### model: continue from the best 10-epoch checkpoint, not the overfit last checkpoint
+model_name_or_path: newsaves/qwen2.5-0.5b/full/Sports_and_Outdoors-sft-dsz2_csga_omoe_v2_strict_ep10/checkpoint-520
+trust_remote_code: true
+### method
+stage: sft
+do_train: true
+finetuning_type: full
+deepspeed: examples/deepspeed/ds_z2_config.json
+
+### dataset
+dataset: Sports_and_Outdoors_train
+cutoff_len: 512
+preprocessing_num_workers: 16
+dataloader_num_workers: 4
+
+### output
+output_dir: newsaves/qwen2.5-0.5b/full/Sports_and_Outdoors-sft-dsz2_csga_omoe_v2_strict_ep10_anneal
+logging_steps: 1
+save_steps: 10
+plot_loss: true
+overwrite_output_dir: true
+save_only_model: false
+save_strategy: steps
+load_best_model_at_end: true
+save_total_limit: 5
+### experiment
+report_to: wandb
+run_name: Sports-qwen2.5-0.5b-sft-dsz2-csga-omoe-v2-strict-ep10-anneal
+
+### train: low-LR cosine anneal around the best region
+per_device_train_batch_size: 16
+gradient_accumulation_steps: 16
+learning_rate: 8.0e-5
+num_train_epochs: 1.5
+lr_scheduler_type: cosine
+warmup_steps: 0
+bf16: true
+ddp_timeout: 180000000
+resume_from_checkpoint: null
+
+### early stopping: eval every 0.05 epoch, 0.4 epoch patience, no stop in first 0.2 epoch
+early_stopping_steps: 8
+early_stopping_threshold: 0.00001
+early_stopping_min_epochs: 0.2
+metric_for_best_model: loss
+greater_is_better: false
+
+### eval
+eval_dataset: Sports_and_Outdoors_valid
+per_device_eval_batch_size: 8
+eval_strategy: steps
+eval_steps: 10

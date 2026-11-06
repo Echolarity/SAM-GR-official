@@ -1,6 +1,6 @@
 import math
 
-from util import _extract_number
+from samgr.utils import _extract_number
 
 
 def partial_hit_rule_reward(prompts, completions, completion_ids, **reward_kwargs):

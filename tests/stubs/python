@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Smoke-test python shim: real work for data possession/preprocessing, simulation
+# for GPU-heavy RQ-VAE, SID generation and evaluation commands.
+set -euo pipefail
+
+REAL="${SMOKE_REAL_PYTHON:-/data/sht/conda/mimigenrec/bin/python}"
+STUB_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+delegate=0
+for arg in "$@"; do
+  case "$arg" in
+    *possess_data.py|*samgr.preprocess|*samgr.check_seed*|-c) delegate=1 ;;
+  esac
+done
+
+if [ "$delegate" = "1" ]; then
+  exec "$REAL" "$@"
+fi
+
+exec "$REAL" "$STUB_DIR/simulate.py" "$@"

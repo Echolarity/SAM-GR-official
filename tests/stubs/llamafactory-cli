@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Smoke-test LlamaFactory shim: create the model output directory expected by
+# evaluate.sh without running a real fine-tuning job.
+set -euo pipefail
+
+out="${EVAL_EXP_NAME:-}"
+if [ -n "$out" ]; then
+  mkdir -p "$out"
+  printf '{"stub": true}\n' > "$out/config.json"
+  echo "[stub] llamafactory-cli -> $out"
+else
+  echo "[stub] llamafactory-cli: EVAL_EXP_NAME unset"
+fi

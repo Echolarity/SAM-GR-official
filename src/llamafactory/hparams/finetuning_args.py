@@ -520,7 +520,15 @@ class FinetuningArguments(
     )
     early_stopping_steps: int | None = field(
         default=None,
-        metadata={"help": "Number of steps to stop training if the `metric_for_best_model` does not improve."},
+        metadata={"help": "Number of evals to stop training if the `metric_for_best_model` does not improve."},
+    )
+    early_stopping_threshold: float = field(
+        default=0.0,
+        metadata={"help": "Minimum absolute improvement of `metric_for_best_model` needed to reset early stopping."},
+    )
+    early_stopping_min_epochs: float = field(
+        default=0.0,
+        metadata={"help": "Do not trigger early stopping before this epoch (warmup guard)."},
     )
     plot_loss: bool = field(
         default=False,
